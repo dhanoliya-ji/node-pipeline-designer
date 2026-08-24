@@ -1,0 +1,52 @@
+# ---- Node ----
+node_modules/
+jspm_packages/
+.npm
+.eslintcache
+build/
+dist/
+coverage/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.venv/
+.tox/
+.pytest_cache/
+.coverage
+coverage.xml
+coverage.json
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# ---- Notebooks ----
+.ipynb_checkpoints/
+
+# ---- Environment ----
+.env
+.env.local
+.env.*.local
+
+# ---- Editors and OS ----
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# The benchmark results are machine-specific; the notebook regenerates them.
+backend/benchmarks/results.csv
