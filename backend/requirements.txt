@@ -1,0 +1,9 @@
+# Runtime dependencies.
+#
+# starlette is pinned because FastAPI 0.11x targets the 0.4x line; a stray
+# 1.x in the environment breaks APIRouter at import time.
+fastapi>=0.115,<0.116.99
+starlette>=0.40,<0.48
+uvicorn[standard]>=0.27
+pydantic>=2.5,<3
+httpx>=0.27
