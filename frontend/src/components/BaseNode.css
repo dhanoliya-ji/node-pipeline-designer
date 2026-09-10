@@ -1,0 +1,327 @@
+/* BaseNode.css
+   Styling for every node on the canvas. Each node sets --node-accent,
+   which tints the header icon, handles and selected state.
+   -------------------------------------------------- */
+
+.base-node {
+  position: relative;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.base-node:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.base-node--selected {
+  border-color: var(--node-accent);
+  box-shadow: var(--shadow-lg), 0 0 0 2px color-mix(in srgb, var(--node-accent) 30%, transparent);
+}
+
+/* Header ---------------------------------------- */
+
+.base-node__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--node-accent) 8%, transparent),
+    transparent
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.base-node__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--node-accent) 14%, transparent);
+  color: var(--node-accent);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.base-node__titles {
+  min-width: 0;
+}
+
+.base-node__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.base-node__subtitle {
+  margin: 1px 0 0;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Body ------------------------------------------ */
+
+.base-node__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+
+.base-node__footer {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+/* Fields ---------------------------------------- */
+
+.node-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.node-field__label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.node-field__hint {
+  margin: 0;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.node-control {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.node-control:focus {
+  border-color: var(--node-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--node-accent) 18%, transparent);
+  background: var(--surface-raised);
+}
+
+.node-control::placeholder {
+  color: var(--text-muted);
+}
+
+.node-control--textarea {
+  display: block;
+  resize: none;
+  line-height: 18px;
+  overflow: hidden;
+}
+
+.node-control--mono {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+select.node-control {
+  cursor: pointer;
+  appearance: none;
+  padding-right: 24px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 13px) 12px, calc(100% - 9px) 12px;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.node-readonly {
+  padding: 6px 8px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.node-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.node-checkbox input {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--node-accent);
+  cursor: pointer;
+}
+
+.node-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.node-slider input {
+  flex: 1;
+  accent-color: var(--node-accent);
+  cursor: pointer;
+}
+
+.node-slider__value {
+  min-width: 26px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Handles --------------------------------------- */
+
+.base-node .base-node__handle {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--surface-raised);
+  border-radius: 50%;
+  background: var(--node-accent);
+  transition: transform 0.12s ease;
+}
+
+.base-node .base-node__handle:hover {
+  transform: scale(1.45);
+}
+
+.base-node .base-node__handle.connectionindicator:hover {
+  cursor: crosshair;
+}
+
+.base-node__handle-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface-raised);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.base-node__handle-label--left {
+  right: 15px;
+}
+
+.base-node__handle-label--right {
+  left: 15px;
+}
+
+/* Validation and run state ----------------------
+   A node shows what the last Validate or Run said about it: a coloured
+   outline for a problem, a badge carrying the messages, and a footer with
+   whatever the node produced.
+   -------------------------------------------------- */
+
+.base-node--error {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 16%, transparent);
+}
+
+.base-node--warning {
+  border-color: var(--accent-amber);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-amber) 16%, transparent);
+}
+
+.base-node__badge {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: help;
+}
+
+.base-node__badge--error {
+  background: var(--danger);
+}
+
+.base-node__badge--warning {
+  background: var(--accent-amber);
+}
+
+.base-node__result {
+  padding: 7px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-sunken);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1.45;
+}
+
+.base-node__result-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.base-node__result--ok {
+  color: var(--success);
+}
+
+.base-node__result--skipped {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.base-node__result--error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.base-node--run-ok {
+  border-color: color-mix(in srgb, var(--success) 45%, var(--border));
+}
+
+.base-node--run-error {
+  border-color: var(--danger);
+}
