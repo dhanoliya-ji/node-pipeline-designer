@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "name": "Broken on purpose",
+  "nodes": [
+    {
+      "id": "text-1",
+      "type": "text",
+      "position": {
+        "x": 300,
+        "y": 100
+      },
+      "data": {
+        "id": "text-1",
+        "text": "{{in}}"
+      }
+    },
+    {
+      "id": "text-2",
+      "type": "text",
+      "position": {
+        "x": 620,
+        "y": 100
+      },
+      "data": {
+        "id": "text-2",
+        "text": "{{in}}"
+      }
+    },
+    {
+      "id": "customInput-1",
+      "type": "customInput",
+      "position": {
+        "x": 80,
+        "y": 320
+      },
+      "data": {
+        "id": "customInput-1",
+        "inputValue": "5"
+      }
+    },
+    {
+      "id": "math-1",
+      "type": "math",
+      "position": {
+        "x": 400,
+        "y": 320
+      },
+      "data": {
+        "id": "math-1",
+        "operation": "add"
+      }
+    },
+    {
+      "id": "text-3",
+      "type": "text",
+      "position": {
+        "x": 400,
+        "y": 520
+      },
+      "data": {
+        "id": "text-3",
+        "text": "Hello {{nobody}}"
+      }
+    },
+    {
+      "id": "merge-1",
+      "type": "merge",
+      "position": {
+        "x": 80,
+        "y": 520
+      },
+      "data": {
+        "id": "merge-1",
+        "strategy": "concat",
+        "inputCount": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "text-1->text-2",
+      "source": "text-1",
+      "target": "text-2",
+      "sourceHandle": "text-1-output",
+      "targetHandle": "text-2-in"
+    },
+    {
+      "id": "text-2->text-1",
+      "source": "text-2",
+      "target": "text-1",
+      "sourceHandle": "text-2-output",
+      "targetHandle": "text-1-in"
+    },
+    {
+      "id": "customInput-1->math-1",
+      "source": "customInput-1",
+      "target": "math-1",
+      "sourceHandle": "customInput-1-value",
+      "targetHandle": "math-1-a"
+    }
+  ]
+}

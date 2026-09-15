@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "name": "Weighted score",
+  "nodes": [
+    {
+      "id": "customInput-1",
+      "type": "customInput",
+      "position": {
+        "x": 80,
+        "y": 100
+      },
+      "data": {
+        "id": "customInput-1",
+        "inputName": "quality",
+        "inputType": "Number",
+        "inputValue": "8"
+      }
+    },
+    {
+      "id": "customInput-2",
+      "type": "customInput",
+      "position": {
+        "x": 80,
+        "y": 320
+      },
+      "data": {
+        "id": "customInput-2",
+        "inputName": "weight",
+        "inputType": "Number",
+        "inputValue": "3"
+      }
+    },
+    {
+      "id": "math-1",
+      "type": "math",
+      "position": {
+        "x": 400,
+        "y": 200
+      },
+      "data": {
+        "id": "math-1",
+        "operation": "multiply",
+        "precision": 0
+      }
+    },
+    {
+      "id": "condition-1",
+      "type": "condition",
+      "position": {
+        "x": 720,
+        "y": 200
+      },
+      "data": {
+        "id": "condition-1",
+        "expression": "value >= 20"
+      }
+    },
+    {
+      "id": "text-1",
+      "type": "text",
+      "position": {
+        "x": 1040,
+        "y": 90
+      },
+      "data": {
+        "id": "text-1",
+        "text": "PASS with {{score}}"
+      }
+    },
+    {
+      "id": "text-2",
+      "type": "text",
+      "position": {
+        "x": 1040,
+        "y": 330
+      },
+      "data": {
+        "id": "text-2",
+        "text": "FAIL with {{score}}"
+      }
+    },
+    {
+      "id": "merge-1",
+      "type": "merge",
+      "position": {
+        "x": 1360,
+        "y": 200
+      },
+      "data": {
+        "id": "merge-1",
+        "strategy": "concat",
+        "separator": " | ",
+        "inputCount": 2
+      }
+    },
+    {
+      "id": "customOutput-1",
+      "type": "customOutput",
+      "position": {
+        "x": 1680,
+        "y": 200
+      },
+      "data": {
+        "id": "customOutput-1",
+        "outputName": "verdict"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "customInput-1->math-1",
+      "source": "customInput-1",
+      "target": "math-1",
+      "sourceHandle": "customInput-1-value",
+      "targetHandle": "math-1-a"
+    },
+    {
+      "id": "customInput-2->math-1",
+      "source": "customInput-2",
+      "target": "math-1",
+      "sourceHandle": "customInput-2-value",
+      "targetHandle": "math-1-b"
+    },
+    {
+      "id": "math-1->condition-1",
+      "source": "math-1",
+      "target": "condition-1",
+      "sourceHandle": "math-1-result",
+      "targetHandle": "condition-1-value"
+    },
+    {
+      "id": "condition-1->text-1",
+      "source": "condition-1",
+      "target": "text-1",
+      "sourceHandle": "condition-1-true",
+      "targetHandle": "text-1-score"
+    },
+    {
+      "id": "condition-1->text-2",
+      "source": "condition-1",
+      "target": "text-2",
+      "sourceHandle": "condition-1-false",
+      "targetHandle": "text-2-score"
+    },
+    {
+      "id": "text-1->merge-1",
+      "source": "text-1",
+      "target": "merge-1",
+      "sourceHandle": "text-1-output",
+      "targetHandle": "merge-1-input_1"
+    },
+    {
+      "id": "text-2->merge-1",
+      "source": "text-2",
+      "target": "merge-1",
+      "sourceHandle": "text-2-output",
+      "targetHandle": "merge-1-input_2"
+    },
+    {
+      "id": "merge-1->customOutput-1",
+      "source": "merge-1",
+      "target": "customOutput-1",
+      "sourceHandle": "merge-1-merged",
+      "targetHandle": "customOutput-1-value"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "name": "Greeting",
+  "nodes": [
+    {
+      "id": "customInput-1",
+      "type": "customInput",
+      "position": {
+        "x": 80,
+        "y": 160
+      },
+      "data": {
+        "id": "customInput-1",
+        "inputName": "name",
+        "inputType": "Text",
+        "inputValue": "Ada"
+      }
+    },
+    {
+      "id": "text-1",
+      "type": "text",
+      "position": {
+        "x": 400,
+        "y": 150
+      },
+      "data": {
+        "id": "text-1",
+        "text": "Hello, {{name}}!"
+      }
+    },
+    {
+      "id": "customOutput-1",
+      "type": "customOutput",
+      "position": {
+        "x": 720,
+        "y": 160
+      },
+      "data": {
+        "id": "customOutput-1",
+        "outputName": "greeting",
+        "outputType": "Text"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "customInput-1->text-1",
+      "source": "customInput-1",
+      "target": "text-1",
+      "sourceHandle": "customInput-1-value",
+      "targetHandle": "text-1-name"
+    },
+    {
+      "id": "text-1->customOutput-1",
+      "source": "text-1",
+      "target": "customOutput-1",
+      "sourceHandle": "text-1-output",
+      "targetHandle": "customOutput-1-value"
+    }
+  ]
+}

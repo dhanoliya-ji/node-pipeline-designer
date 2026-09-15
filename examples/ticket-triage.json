@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "name": "Ticket triage",
+  "nodes": [
+    {
+      "id": "customInput-1",
+      "type": "customInput",
+      "position": {
+        "x": 80,
+        "y": 200
+      },
+      "data": {
+        "id": "customInput-1",
+        "inputName": "ticket",
+        "inputType": "Text",
+        "inputValue": "URGENT: the checkout page is down"
+      }
+    },
+    {
+      "id": "filter-1",
+      "type": "filter",
+      "position": {
+        "x": 400,
+        "y": 190
+      },
+      "data": {
+        "id": "filter-1",
+        "operator": "contains",
+        "operand": "urgent",
+        "caseSensitive": false
+      }
+    },
+    {
+      "id": "text-1",
+      "type": "text",
+      "position": {
+        "x": 720,
+        "y": 80
+      },
+      "data": {
+        "id": "text-1",
+        "text": "ESCALATE: {{body}}"
+      }
+    },
+    {
+      "id": "text-2",
+      "type": "text",
+      "position": {
+        "x": 720,
+        "y": 320
+      },
+      "data": {
+        "id": "text-2",
+        "text": "queue normally: {{body}}"
+      }
+    },
+    {
+      "id": "customOutput-1",
+      "type": "customOutput",
+      "position": {
+        "x": 1040,
+        "y": 90
+      },
+      "data": {
+        "id": "customOutput-1",
+        "outputName": "escalated"
+      }
+    },
+    {
+      "id": "customOutput-2",
+      "type": "customOutput",
+      "position": {
+        "x": 1040,
+        "y": 330
+      },
+      "data": {
+        "id": "customOutput-2",
+        "outputName": "queued"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "customInput-1->filter-1",
+      "source": "customInput-1",
+      "target": "filter-1",
+      "sourceHandle": "customInput-1-value",
+      "targetHandle": "filter-1-input"
+    },
+    {
+      "id": "filter-1->text-1",
+      "source": "filter-1",
+      "target": "text-1",
+      "sourceHandle": "filter-1-pass",
+      "targetHandle": "text-1-body"
+    },
+    {
+      "id": "filter-1->text-2",
+      "source": "filter-1",
+      "target": "text-2",
+      "sourceHandle": "filter-1-fail",
+      "targetHandle": "text-2-body"
+    },
+    {
+      "id": "text-1->customOutput-1",
+      "source": "text-1",
+      "target": "customOutput-1",
+      "sourceHandle": "text-1-output",
+      "targetHandle": "customOutput-1-value"
+    },
+    {
+      "id": "text-2->customOutput-2",
+      "source": "text-2",
+      "target": "customOutput-2",
+      "sourceHandle": "text-2-output",
+      "targetHandle": "customOutput-2-value"
+    }
+  ]
+}
