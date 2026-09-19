@@ -1,0 +1,26 @@
+# Brings up the whole application:
+#   docker compose up --build
+# Frontend on http://localhost:3000, API on http://localhost:8000
+
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      # The browser talks to the API directly, so the allowed origin is the
+      # address the *user* loads the frontend from.
+      NPD_CORS_ORIGIN_REGEX: "https?://(localhost|127\.0\.0\.1)(:\d+)?"
+      NPD_ALLOW_OUTBOUND_HTTP: "false"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        REACT_APP_API_URL: http://localhost:8000
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    restart: unless-stopped
