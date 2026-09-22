@@ -2,8 +2,8 @@
 #
 # The React app is a static build (free and never sleeps), and the FastAPI
 # backend is a web service, because validation and execution both live there.
-# The frontend learns the API host through fromService rather than a hardcoded
-# URL, so a name collision on Render cannot silently break the wiring.
+# The frontend is given the API URL at build time; CRA inlines it into the
+# bundle, so changing it requires a rebuild of the static site.
 services:
   - type: web
     name: node-pipeline-api
@@ -30,11 +30,11 @@ services:
     staticPublishPath: ./build
     autoDeploy: true
     envVars:
+      # `fromService ... property: host` yields the bare service name here, not
+      # the resolvable hostname, so the frontend ends up calling
+      # https://node-pipeline-api. The full URL is set literally instead.
       - key: REACT_APP_API_URL
-        fromService:
-          name: node-pipeline-api
-          type: web
-          property: host
+        value: https://node-pipeline-api.onrender.com
     routes:
       # Client-side routing: unknown paths fall back to the app shell.
       - type: rewrite
