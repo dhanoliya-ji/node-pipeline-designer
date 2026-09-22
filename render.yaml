@@ -1,0 +1,42 @@
+# Render Blueprint — the designer deploys as two services.
+#
+# The React app is a static build (free and never sleeps), and the FastAPI
+# backend is a web service, because validation and execution both live there.
+# The frontend learns the API host through fromService rather than a hardcoded
+# URL, so a name collision on Render cannot silently break the wiring.
+services:
+  - type: web
+    name: node-pipeline-api
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Both services are served from *.onrender.com, so allow that origin.
+      - key: NPD_CORS_ORIGIN_REGEX
+        value: https://.*\.onrender\.com
+
+  - type: web
+    name: node-pipeline-designer
+    runtime: static
+    rootDir: frontend
+    branch: main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./build
+    autoDeploy: true
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          name: node-pipeline-api
+          type: web
+          property: host
+    routes:
+      # Client-side routing: unknown paths fall back to the app shell.
+      - type: rewrite
+        source: /*
+        destination: /index.html

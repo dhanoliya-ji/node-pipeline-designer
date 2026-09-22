@@ -8,8 +8,13 @@
 
 import { toApiPayload } from '../lib/serialize';
 
-export const API_BASE_URL =
-  process.env.REACT_APP_API_URL || 'http://localhost:8000';
+// Render's `fromService` supplies a bare hostname, not a URL, so add the
+// scheme when one is missing. A full URL (or the local default) passes through.
+const CONFIGURED_API = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+export const API_BASE_URL = /^https?:\/\//.test(CONFIGURED_API)
+  ? CONFIGURED_API
+  : `https://${CONFIGURED_API}`;
 
 export class ApiError extends Error {
   constructor(message, { status = null, unreachable = false } = {}) {
